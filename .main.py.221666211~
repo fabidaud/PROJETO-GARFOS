@@ -1,0 +1,241 @@
+# TEORIA DOS GRAFOS - ATIVIDADE PROJETO 1 - ARQUIVO FONTE FUNÇÃO PRINCIPAL
+# BRUNO CASTRO TOMAZ - RA: 10389988
+# GUSTAVO SAAD MALUHY ANDRADE - RA: 10332747
+# LAURA FONTE ABI DAUD - RA: 10395586
+
+#tem coisas nese codigo que precisam ser revisadas, e funções em grafoMatriz e grafoLista que talvez não precise e possa ser removido
+from grafoMatriz import *
+from grafoLista import *
+import os
+
+'''
+def menu():
+  print('##########################################
+TEORIA DOS GRAFOS - ATIVIDADE PROJETO 1
+BRUNO CASTRO TOMAZ - RA: 10389988
+GUSTAVO SAAD MALUHY ANDRADE - RA: 10332747
+LAURA FONTE ABI DAUD - RA: 10395586
+##########################################')
+  print('\n\n============TRAFFIC SOLVER============\n
+  1) Ler dados do arquivo 
+  2) Gravar dados no arquivo 
+  3) Inserir vértice
+  4) Inserir aresta
+  5) Remove vértice
+  6) Remove aresta
+  7) Mostrar conteúdo do arquivo
+  8) Mostrar grafo
+  9) Apresentar a conexidade do grafo e o reduzido
+  0) Encerrar a aplicação')
+
+def espera_Enter():
+  print("Pressione ENTER para continuar...")
+  input()
+
+#TODO : matriz com os sentidos (mão unica mao dupla)
+#TODO: implementar matriz e lista com pesos
+def lerArquivo():
+  vertices = []
+  grafo = None
+  with open("grafo.txt", "r") as file:
+    tipo = file.readline().strip()
+    if tipo == '6':
+      n = int(file.readline().strip())
+      grafo = TGrafo(n) # cria matriz
+      #-1 indica ausência de peso
+      for i in range(n):
+        vertices.append(file.readline().strip())
+      m = int(file.readline().strip()) # lê qtde de arestas: 163
+      while m > 0:
+        linha = file.readline().rstrip('\n').split(';')
+        grafo.insereA(int(linha[0]) - 1, int(linha[1]) - 1, int(linha[3]), linha[2])
+        m -= 1
+      print("\nGRAFO LIDO DO ARQUIVO!")
+  espera_Enter()
+  return vertices, grafo
+
+def gravarArquivo(vetor,rotulos,pesos,grafo):
+  with open("grafoSaida.txt", "w") as file:
+    file.write("6\n")
+    file.write(f"{grafo.n}\n")
+    for i in range(len(vetor)):
+      file.write(f"{vetor[i]}\n")
+    file.write(f"{grafo.m}\n")
+    for i in range(len(grafo.adj)):
+      for j in range(len(grafo.adj)):
+        if grafo.adj[i][j] == 1:
+          file.write(f"{vetor[i]};{vetor[j]};{rotulos[i][j]};{pesos[i][j]}\n")  
+  espera_Enter()
+
+#este codigo talvez nao funcione tambem
+def inserirVertice(vetor,rotulos, pesos, grafo):
+  novo_vertice = grafo.n+1
+  grafo.n+=1
+  vetor.append(novo_vertice)
+  for i in range(len(grafo.adj)):
+    grafo.adj[i].append(0)
+  grafo.adj.append([0]*grafo.n)
+  
+  for i in range(len(rotulos)):
+    rotulos[i].append('')
+  rotulos.append(['']*(grafo.n))
+  
+  for i in range(len(pesos)):
+    pesos[i].append('')
+  pesos.append(['']*(grafo.n))
+  
+  print(f"\nVértice {novo_vertice} inserido com sucesso!")
+  espera_Enter()
+
+#este codigo talvez nao funcione
+#tem que atualizar a matriz de pesos, rótulos, vetor
+def inserirAresta(vetor,rotulos,pesos,grafo):
+  v = input("Digite o vértice origem: ")
+  while v not in vetor:
+    print("Vértice não encontrado!\n Digite 'c' para cancelar operação\n")
+    v = input("Digite o vértice: ")
+    if v == 'c':
+      return
+  w = input("Digite o vértice destino: ")
+  while v not in vetor:
+    print("Vértice não encontrado!\n Digite 'c' para cancelar operação\n")
+    v = input("Digite o vértice: ")
+    if v == 'c':
+      return
+  # v encontrado
+  print("Vertice encontrado\n")
+  p = input("Digite o peso da nova aresta: ")
+  r = input("Digite o rótulo da nova aresta: ")
+  
+  grafo.insereA(int(v)-1,int(w)-1)
+  rotulos[int(v)-1][int(w)-1] = r
+  pesos[int(v)-1][int(w)-1] = int(p)
+  
+  espera_Enter()
+
+def removerVertice():
+  #escopo aqui
+  espera_Enter()
+
+def removerAresta():
+  #escopo aqui
+  espera_Enter()
+
+def mostrarArquivo():
+  #escopo aqui
+  espera_Enter()
+  
+def mostrarGrafo(grafo):
+  # lista = Grafo(grafo.n)
+  # lista.converteMatriz(grafo.adj)
+  # lista.show()
+  grafo.show()
+  espera_Enter()
+
+def exercicio9():
+  #Apresentar a conexidade do grafo e o reduzido
+  espera_Enter()
+
+def main():
+  option = -1
+  vertices = []
+  rotulos = ''
+  #pesos = []
+  grafo = None
+
+  while option != 0:
+    os.system("clear") 
+    menu()
+    print("\nEscolha Sua opção: ", end ='')
+    option = int(input())
+    if option == 1:
+      os.system("clear")
+      vertices, grafo = lerArquivo()
+      
+    elif option == 2:
+      os.system("clear") 
+      gravarArquivo(vertices,rotulos,pesos,grafo)
+      
+    elif option == 3:
+      os.system("clear") 
+      inserirVertice(vertices,rotulos, pesos, grafo)
+      
+    elif option == 4:
+      os.system("clear")
+      inserirAresta(vertices,rotulos,pesos,grafo)
+      
+    elif option == 5:
+      os.system("clear") 
+      removerVertice()
+      
+    elif option == 6:
+      os.system("clear") 
+      removerAresta()
+      
+    elif option == 7:
+      os.system("clear") 
+      mostrarArquivo()
+    
+    elif option == 8:
+      os.system("clear") 
+      mostrarGrafo(grafo)
+    
+    elif option == 9:
+      os.system("clear") 
+      exercicio9()
+    
+    elif option == 0:
+      print("Encerrando Programa....")
+    
+    else:
+      while option < 0 or option > 9:
+        print("\nOpção inválida! Tente novamente: ", end= '')
+        option = int(input())
+    
+  return 0    
+main()
+
+'''
+def espera_Enter():
+  print("Pressione ENTER para continuar...")
+  input()
+
+def lerArquivo():
+  vertices = []
+  grafo = None
+  with open("grafo.txt", "r") as file:
+    tipo = file.readline().strip()
+    if tipo == '6':
+      n = int(file.readline().strip())
+      grafo = TGrafo(n) # cria matriz
+      #-1 indica ausência de peso
+      for i in range(n):
+        vertices.append(file.readline().strip())
+      m = int(file.readline().strip()) # lê qtde de arestas: 163
+      while m > 0:
+        linha = file.readline().rstrip('\n').split(';')
+        grafo.insereA(int(linha[0]) - 1, int(linha[1]) - 1, int(linha[3]), linha[2])
+        m -= 1
+      print("\nGRAFO LIDO DO ARQUIVO!")
+  espera_Enter()
+  return vertices, grafo
+
+
+def gravarArquivo(vetor,rotulos,pesos,grafo):
+  with open("grafoSaida.txt", "w") as file:
+    file.write("6\n")
+    file.write(f"{grafo.n}\n")
+    for i in range(grafo.n):
+      file.write(f"{i+1}\n")
+    file.write(f"{grafo.m}\n")
+    for i in range(grafo.n):
+      for j in range(grafo.n):
+        if grafo.adj[i][j] != 1:
+          file.write(f"{i+1};{j+1};{rotulos[i][j]};{pesos[i][j]}\n")  
+  espera_Enter()
+
+def main():
+  vertices, grafo = lerArquivo()
+  grafo.show_list()
+
+main()

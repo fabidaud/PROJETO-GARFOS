@@ -1,0 +1,245 @@
+6
+79
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+163
+1;2;R. AlamedaBarros;100
+2;1;R. Alameda Barros;100
+2;3;R. Alameda Barros;150
+2;14;R. Dr. Brasilio Machado;350
+3;2;R. Alameda Barros;150
+3;4;R. Alameda Barros;140
+4;3;R. Alameda Barros;150
+4;5;R. Alameda Barros;150
+4;16;R. Sao Vicente de Paulo;350
+5;4;R. Alameda Barros;150
+5;6;R. Alameda Barros;85
+5;17;Av. Angelica;350
+6;5;R. Alameda Barros;85
+6;7;R. Alameda Barros;240
+7;6;R. Alameda Barros;240
+7;8;R. Frederico Abranches;50
+8;7;R. Frederico Abranches;50
+8;9;R. Frederico Abranches;140
+8;21;R. Fortunato;170
+9;8;R. Frederico Abranches;140
+9;22;R. Dona Veridiana;120
+10;11;R. Emilio de Menezes;130
+10;12;R. Conselheiro Brotero;140
+11;1;R. Dr. Gabriel dos Santos;190
+11;10;R. Emílio de Menezes;130
+12;23;R. Conselheiro Brotero;110
+13;11;R. Doutor Gabriel dos Santos;180
+13;12;R. Baronesa de Itu;130
+14;13;R. Baronesa de Itu;88
+14;25;R. Doutor Brasilio Machado;140
+15;3;R. Doutor Albuquerque Lins;350
+15;14;R. Baronesa de Itu;150
+16;15;R. Doutor Albuquerque Lins;130
+16;27;R. Sao Vicente de Paulo;180
+17;5;Av. Angelica;350
+17;16;R. Baronesa de Itu;160
+17;28;Av. Angelica;190
+18;6;R. Barao de Tatui;300
+18;17;R. Baronesa de Itu;75
+18;20;R. Imaculada Conceicao;380
+19;18;R. Baronesa de Itu;140
+19;20;R. Martim Francisco;83
+19;31;R. Aureliano Coutinho;220
+20;6;R. Imaculada Conceicao;310
+20;7;R. Martim Francisco;120
+21;8;R. Fortunato;170
+21;19;R. Canuto do Val;130
+21;32;R. Fortunato;150
+22;9;R. Dona Veridiana;110
+22;21;R. Canuto do Val;110
+22;33;R. Dona Veridiana;120
+23;24;R. Doutor Veiga Filho;120
+23;50;R. Conselheiro Brotero;190
+24;13;R. Doutor Gabriel dos Santos;120
+24;25;R. Doutor Veiga Filho;100
+25;26;R. Doutor Veiga Filho;160
+26;15;R. Albuquerque Lins;170
+26;27;R. Doutor Veiga Filho;130
+26;51;R. Albuquerque Lins;180
+27;28;R. Doutor Veiga Filho;170
+28;17;Av. Angelica;190
+28;29;R. Jaguaribe;70
+28;36;Av. Angelica;120
+29;18;R. Barao de Tatui;200
+29;30;R. Jaguaribe;50
+30;19;R. Martin Francisco;240
+30;31;R. Jaguaribe;140
+31;32;R. Jaguaribe;100
+31;38;R. Aureliano Coutinho;120
+32;21;R. Fortunato;150
+32;33;R. Jaguaribe;130
+33;22;R. Dona Veridiana;120
+33;34;R. Jaguaribe;100
+33;39;R. Dona Veridiana;120
+34;35;R. Jaguaribe;130
+36;28;Av. Angelica;120
+36;37;R. Martinico Prado;160
+36;52;Av. Angelica;130
+37;30;R. Martin Francisco;120
+37;36;R. Martinico Prado;170
+37;38;R. Martinico Prado;140
+38;37;R. Martinico Prado;130
+38;39;R. Martinico Prado;190
+38;41;R. Aureliano Coutinho;110
+39;33;R. Dona Veridiana;130
+39;38;R. Martinico Prado;200
+39;42;R. Dona Veridiana;110
+40;37;R. Martin Francisco;110
+41;40;R. Marques de Itu;130
+41;45;R. Sabara;40
+42;39;R. Dona Veridiana;120
+42;41;R. Marques de Itu;170
+42;46;R. Dona Veridiana;100
+43;42;R. Marques de Itu;140
+43;47;R. Doutor Vila Nova;100
+44;35;R. Doutor Cesario Mota Junior;110
+45;46;R. General Jardim;170
+45;55;R. Sabara;90
+46;42;R. Dona Veridiana;100
+46;56;R. Dona Veridiana;80
+47;46;R. General Jardim;170
+47;57;R. Doutor Vila Nova;80
+48;44;R. Doutor Cesario Mota Junior;110
+49;47;R. General Jardim;140
+49;48;R. Doutor Cesario Mota Junior;90
+50;59;R. Rio de Janeiro;100
+51;26;R. Doutor Albuquerque Lins;190
+51;50;Av. Higienopolis;350
+51;60;R. Aracaju;100
+52;36;Av. Angelica;120
+52;51;Av. Higienopolis;280
+52;61;Av Angelica;110
+53;52;Av. Higienopolis;160
+54;40;R. Martim Francisco;80
+54;53;Av. Higienopolis;70
+55;54;Av. Higienopolis;90
+55;63;R. Sabara;110
+56;46;R. Dona Veridiana;90
+56;55;Av. Higienopolis;160
+56;57;R. Major Sertorio;200
+56;64;R. Itambe;120
+57;58;R. Major Sertorio;140
+57;65;R. Doutor Vila Nova;160
+58;49;R. Doutor Cesario Mota Junior;85
+60;51;R. Aracaju;100
+60;59;R. Maranhao;300
+61;52;Av. Angelica;100
+61;60;Rua Maranhao;300
+61;69;Av. Angelica;110
+62;53;R. Itacolome;110
+62;61;R. Maranhao;170
+63;62;R. Maranhao;160
+63;71;R. Sabara;110
+64;56;R. Itambe;120
+64;63;R. Maranhao;150
+64;72;R. Itambe;120
+65;56;R. Maria Antonia;240
+66;58;R. Doutor Cesario Mota Junior;90
+67;66;R. Doutor Cesario Mota Junior;110
+68;60;R. Bahia;170
+68;69;R. Piaui;220
+68;74;R. Bahia;130
+69;61;Av. Angelica;110
+69;70;R. Piaui;160
+69;75;Av. Angelica;140
+70;62;R. Itacolome;110
+70;71;R. Piaui;160
+71;72;R. Piaui;120
+71;77;R. Sabara;130
+72;64;R. Itambe;120
+72;73;R. Piaui;250
+72;78;R. Itambe;140
+73;79;R. da Consolacao;350
+74;68;R. Bahia;120
+75;69;R. Alagoas;150
+75;74;R. Alagoas;210
+76;70;R. Itacolome;130
+76;75;R. Alagoas;160
+77;76;R. Alagoas;160
+78;72;R. Itambe;140
+78;77;R. Alagoas;80
+79;65;R. Maria Antonia;190
+79;67;R. Doutor Cesario Mota Junior;85
