@@ -54,13 +54,13 @@ def get_confirmation(mensagem):
   return False
 
 def espera_Enter():
-  print("Pressione ENTER para continuar...")
+  print("\nPressione ENTER para continuar...")
   input()
 
 def lerArquivo():
   grafo = None
   vertices = []
-  with open("teste.txt", "r") as file:
+  with open("grafo.txt", "r") as file:
     tipo = file.readline().strip()
     if tipo == '6':
       n = int(file.readline().strip())
@@ -75,7 +75,7 @@ def lerArquivo():
         linha = file.readline().rstrip('\n').split(';')
         grafo.insereA(int(linha[0]) - 1, int(linha[1]) - 1, int(linha[3]), linha[2])
         m -= 1
-    print("\nGRAFO LIDO DO ARQUIVO!")
+    print("\nLEITURA DO GRAFO CONCLUÍDA!")
   espera_Enter()
   return grafo, vertices
 
@@ -93,9 +93,7 @@ def gravarArquivo(grafo, vertices):
       for j in range(grafo.n):
         if grafo.adj[i][j] != -1:
           file.write(f"\n{vertices[i]};{vertices[j]};{grafo.rua[i][j]};{grafo.adj[i][j]}")  
-    print("\nGRAFO GRAVADO NO ARQUIVO!")
-  
-  espera_Enter()
+
 
 def inserirVertice(grafo, vertices):
   novo_vertice = grafo.insereV()
@@ -134,7 +132,7 @@ def inserirAresta(grafo, vertices):
 
 def removerVertice(grafo, vertices):  
   vertice = input_in_range('o vértice a ser removido', vertices[0], grafo.n)
-  os.system('clear')
+  
   if vertice is None:
     return
   grafo.removeV(vertice-1)
@@ -145,12 +143,10 @@ def removerVertice(grafo, vertices):
 
 def removerAresta(grafo, vertices):  
   origem = input_in_range('o vértice origem', vertices[0], grafo.n)
-  os.system('clear')
   if origem is None:
     return
   
   destino = input_in_range('o vértice destino', vertices[0], grafo.n)
-  os.system('clear')
   if destino is None:
     return
 
@@ -189,16 +185,21 @@ def mostrarGrafo(grafo, vertices):
   espera_Enter()
 
 def grafoReduzido(grafo):
-  print("GRAFO ATUAL:")
-  conexidade = grafo.conexidade()  
-  if (conexidade == 3):
-    print("\nEste grafo é fortemente conexo, categoria C3!\n")
-  elif (conexidade == 2):
-    print("\nEste grafo é semifortemente conexo, categoria C2!\n")
-  elif (conexidade == 1):
-    print("\nEste grafo é simplesmente conexo, categoria C1!\n")
-  elif (conexidade == 0):
-    print("\nEste grafo é desconexo, categoria C0!\n")
+  # print("GRAFO ATUAL:")
+  # conexidade = grafo.conexidade()
+  # if (conexidade == 3):
+  #   print("\nEste grafo é fortemente conexo, categoria C3!\n")
+  # elif (conexidade == 2):
+  #   print("\nEste grafo é semifortemente conexo, categoria C2!\n")
+  # elif (conexidade == 1):
+  #   print("\nEste grafo é simplesmente conexo, categoria C1!\n")
+  # elif (conexidade == 0):
+  #   print("\nEste grafo é desconexo, categoria C0!\n")
+  
+  print("\nGRAFO REDUZIDO:\n")
+  grafoReduzido = grafo.grafoReduzido()
+  
+  
   espera_Enter()
   
 def definir_rota(grafo, vertices):
@@ -217,14 +218,21 @@ def definir_rota(grafo, vertices):
     espera_Enter()
     return
   resultado = grafo.dijkstra(origem-1)
-  print("\nesquema de melhores rotas após algoritmo de dijkstra: ")
-  for i in range(len(resultado)):
-    resultado[i][1] = vertices[i]
-  print(resultado)
+  # print("\nesquema de melhores rotas após algoritmo de dijkstra: ")
+  # print(resultado)
+  for subgrafo in resultado:
+    if subgrafo is not None:
+      distancia_total, distancia_parcial, ruas, final = subgrafo
+      if final == destino-1:
+        print(f"\nRota de {vertices[origem-1]} para {vertices[destino-1]}:\n")
+        for i in range(len(distancia_parcial)):
+          print(f"Siga por {distancia_parcial[i]} metros em {ruas[i]}\n")
+        print(f"Você chegou ao seu destino: {vertices[final]}\n")
+        print(f"Distância total percorrida: {distancia_total} metros\n")
+        break
+      else:
+        continue
   espera_Enter()
-  #implementar
-  #grafo.dijkstra(origem-1, destino-1)
-
 
 def main():
   option = -1
@@ -248,6 +256,8 @@ def main():
       else:
         os.system("clear") 
         gravarArquivo(grafo, vertices)
+        print("\nGRAFO GRAVADO NO ARQUIVO!")
+        espera_Enter()
 
     elif option == 3:
       if grafo is None:
@@ -283,6 +293,7 @@ def main():
 
     elif option == 7:
       os.system("clear") 
+      gravarArquivo(grafo, vertices)
       mostrarArquivo(vertices)
 
     elif option == 8:

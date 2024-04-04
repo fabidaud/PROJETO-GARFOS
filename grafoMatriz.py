@@ -81,56 +81,121 @@ class TGrafo:
 
   def show_list(self,vertices):
     # Imprime grafo como uma lista de adjacência
-    for i in range(self.n):
+    for i in range(len(vertices)):
       print(f"\n{vertices[i]} : ", end="")
-      for j in range(self.n):
+      for j in range(len(vertices)):
         if self.adj[i][j] != -1:
           print(f"{vertices[j]} -> {self.adj[i][j]} ", end="| ")
       print()
 
   def show_list_rotulos(self,vertices):
     # Imprime grafo como uma lista de adjacência com pesos
-    for i in range(self.n):
+    for i in range(len(vertices)):
       print(f"\n{vertices[i]} : ", end="")
-      for j in range(self.n):
+      for j in range(len(vertices)):
         if self.adj[i][j] != -1:
           print(f"{vertices[j]} {self.rua[i][j]} -> {self.adj[i][j]} ", end="| ")
       print()
 
-  def inDegree(self, v):
-    entrada = 0
-    for i in range(self.n):
-      if self.adj[i][v] != -1: # verifica se existe a aresta
-        entrada += 1
-    print(f"\nO grau de entrada do vértice {v} é {entrada}.")
+  # def C3(self):
 
-  def outDegree(self, v):
-    saida = 0
-    for i in range(self.n):
-      if self.adj[v][i] != -1: # verifica se existe a aresta
-        saida += 1
-    print(f"\nO grau de saída do vértice {v} é {saida}.")
+  #   def dfs_T(v):
+  #     fechoTransitivo.append(v)
+  #     for u in range(self.n):
+  #       if self.adj[v][u] == 1 and u not in fechoTransitivo:
+  #         dfs_T(u)
 
-  def isFonte(self, v):
-    for i in range(self.n):
-      if self.adj[i][v] != -1: # verifica se existe a aresta
-        return 0
-    return 1
+  #   def dfs_I(v):
+  #     fechoInverso.append(v)
+  #     for u in range(self.n):
+  #       if self.adj[u][v] == 1 and u not in fechoInverso:
+  #         dfs_I(u)
 
-  def isSorvedouro(self, v):
-    for i in range(self.n):
-      if self.adj[v][i] != -1: # verifica se existe a aresta
-        return 0
-    return 1
+  #   fechoTransitivo = []
+  #   fechoInverso = []
+  #   v = -1
+  #   for i in range(self.n):
+  #     for j in range(self.n):
+  #       if self.adj[i][j] == 1:
+  #         v = i
+  #         break
+  #     if v != -1:
+  #       break
+  #   dfs_T(v)
+  #   dfs_I(v)
+  #   fechoTransitivo.sort()
+  #   fechoInverso.sort()
+  #   if fechoTransitivo == fechoInverso:
+  #     return 1
+  #   else:
+  #     return 0
 
-  def completo(self):
-    for i in range(self.n):
-      for j in range(self.n):
-        if i != j and self.adj[i][j] == -1:
-          print("\nEste grafo não é completo!")
-          return
-    print("\nEste grafo é completo!")
+  # def C2(self):
 
+  #   def dfs_T(v):
+  #     fechoTransitivo.append(v)
+  #     for u in range(self.n):
+  #       if self.adj[v][u] == 1 and u not in fechoTransitivo:
+  #         dfs_T(u)
+
+  #   def dfs_I(v):
+  #     fechoInverso.append(v)
+  #     for u in range(self.n):
+  #       if self.adj[u][v] == 1 and u not in fechoInverso:
+  #         dfs_I(u)
+
+  #   fechoTransitivo = []
+  #   fechoInverso = []
+  #   v = -1
+  #   for i in range(self.n):
+  #     for j in range(self.n):
+  #       if self.adj[i][j] == 1:
+  #         v = i
+  #         break
+  #     if v != -1:
+  #       break
+  #   dfs_T(v)
+  #   dfs_I(v)
+  #   uniao = list(set(fechoTransitivo + fechoInverso))
+  #   if len(uniao) == self.n:
+  #     return 1
+  #   else:
+  #     return 0
+
+  # def C1(self, copia):
+  #   #Implementação do algoritmo de Warshall para verificar acessibilidades
+  #   for k in range(self.n):
+  #     for i in range(self.n):
+  #       for j in range(self.n):
+  #         copia[i][j] = copia[i][j] or (copia[i][k] and copia[k][j])
+  #   for i in range(self.n):
+  #     for j in range(self.n):
+  #       if copia[i][j] != 1:
+  #         return 0
+  #   return 1
+
+  # def C0(self, copia):
+  #   for k in range(self.n):
+  #     for i in range(self.n):
+  #       for j in range(self.n):
+  #         copia[i][j] = copia[i][j] or (copia[i][k] and copia[k][j])
+  #   for i in range(self.n):
+  #     for j in range(self.n):
+  #       if copia[i][j] != 1:
+  #         return 1
+  #   return 0
+
+  # def categoriaConexidade(self):
+  #   copia = [linha[:] for linha in self.adj]
+  #   copia = converteDirecionados(copia)
+  #   if self.C0(copia) == 1:
+  #     return 0
+  #   elif self.C3() == 1:
+  #     return 3
+  #   elif self.C2() == 1:
+  #     return 2
+  #   elif self.C1(copia) == 1:
+  #     return 1
   def dfs(self,v, visitados):
     if v not in visitados:
       visitados.append(v)
@@ -201,121 +266,151 @@ class TGrafo:
           categoria = 1
     return categoria
 
-  # def grafoReduzido(self):
-  #   # encontrar r- e r+ de dada vertice, cada iteração vai formar um componente reduzido (intersecção de r- e r+)
-  #   def dfs(copia, v, visitados, componente_f_conexa):
-  #     def dfs_T(v):
-  #       fechoTransitivo.append(v)
-  #       for u in range(len(copia)):
-  #         if copia[v][u] != -1 and u not in fechoTransitivo:
-  #           dfs_T(u)
-          
-  #     def dfs_I(v):
-  #       fechoInverso.append(v)
-  #       for u in range(len(copia)):
-  #         if copia[u][v] != -1 and u not in fechoInverso:
-  #           dfs_I(u)
-  #     fechoTransitivo = []
-  #     fechoInverso = []
-  #     dfs_T(v)
-  #     dfs_I(v)
-  #     componente_f_conexa = list(set(fechoTransitivo) & set(fechoInverso))
-  #     print("Interssecao: ", componente_f_conexa)
-  #     for i in range(len(copia)):
-  #       if i in componente_f_conexa:
-  #         visitados[i] = True
-  #     return visitados, componente_f_conexa
-      
-      
-        
-  #   def encontrar_componentes(copia):
-  #     visitados = [False] * len(copia)
-  #     componentes_f_conexas = []
-  #     for v in range(len(copia)):
-  #       if not visitados[v]:
-  #         componente_f_conexa = []
-  #         visitados, componente = dfs(copia, v, visitados, componente_f_conexa)
-  #         componentes_f_conexas.append(componente)
-  #     return componentes_f_conexas
-    
-  #   copia = self.adj
-  #   componentes_f_conexas = encontrar_componentes(copia)
-  #   print("COMPONENTES F-CONEXAS:")
-  #   print(componentes_f_conexas)
-  #   grafo_reduzido = TGrafo(len(componentes_f_conexas))
-  #   for componente in componentes_f_conexas:
-  #     for u in componente:
-  #       for v in range(self.n):
-  #           if copia[u][v] != -1 and v not in componente:
-  #             peso = copia[u][v]
-  #             rua = ' ' #iremos usar sem rua o grafo reduzido
-  #             origem = componentes_f_conexas.index(componente)
-  #             destino = componentes_f_conexas.index([x for x in componentes_f_conexas if v in x][0])
-  #             if grafo_reduzido.adj[origem][destino] == -1:
-  #               grafo_reduzido.insereA(origem, destino, peso, rua)
-  #   return grafo_reduzido
-    
+     
   def grafoReduzido(self):
     
     def achar_r_negativo(matriz, vertice):
       lista = [vertice]
-      for i in range(len(matriz)):
-        if i == vertice:
-          continue
-        if matriz[i][vertice] != -1:
-          lista.append(i)
+
+      adicionado = True
+
+      while adicionado:
+        adicionado = False
+        for i in range(len(matriz)):
+          for y in lista:
+            if matriz[i][y] == 1 and i not in lista:
+              lista.append(i)
+              adicionado = True
       return lista
 
     def achar_r_positivo(matriz, vertice):
       lista = [vertice]
+  
+      adicionado = True
+  
+      while adicionado:
+        adicionado = False
+        for i in range(len(matriz)):
+          for y in lista:  
+            if matriz[y][i] == 1 and i not in lista:
+              lista.append(i)
+              adicionado = True
+      return lista
+
+    def achar_conexoes(matriz, lista):
+      conexoes_positivo = []
+      conexoes_negativo = []
+      for i in lista:
+        for y in range(len(matriz)):
+          if y in lista:
+            continue
+          if matriz[i][y] == 1 and y not in conexoes_positivo:
+            conexoes_positivo.append(y)
+  
+      for i in lista:
+        for y in range(len(matriz)):
+          if y in lista:
+            continue
+          if matriz[y][i] == 1 and y not in conexoes_negativo:
+            conexoes_negativo.append(y)
+      return conexoes_positivo, conexoes_negativo
+
+    def uniao_grafo(matriz, intersecao, lista_positivo, lista_negativo):
+      #primeiro une os vertices
+
+      intersecao.sort()
+      # print(intersecao)
+      # print('\n')
+      # for i in matriz:
+      #   for y in i:
+      #     print(y, end=' ')
+      #   print()
+      
+      for i in lista_positivo:
+        matriz[intersecao[0]][i] = 1
+
+      for i in lista_negativo:
+        matriz[i][intersecao[0]] = 1
+
+      for i in range(len(intersecao)-1, 0, -1):
+        del matriz[intersecao[i]]
+
       for i in range(len(matriz)):
-        if i == vertice:
-          continue
-        if matriz[vertice][i] != -1:
-          lista.append(i)
-      return lista 
+        for j in range(len(intersecao)-1, 0, -1):
+          del matriz[i][j]
+
+      return matriz
     
-    novo_grafo = []
+    novo_grafo = [row[:] for row in self.adj]
+    for i in range(len(novo_grafo)):
+      for y in range(len(novo_grafo)):
+        if novo_grafo[i][y] == -1:
+          novo_grafo[i][y] = 0
+        else:
+          novo_grafo[i][y] = 1
+
     iteracoes = self.n
     
-    for i in range(iteracoes):
-      r_negativo = achar_r_negativo(self.adj, i)
-      r_positivo = achar_r_positivo(self.adj, i)
-      
-      #achar r-
+    i = 0
+    while i < iteracoes:
 
-      #achar r+
-      #intersecção de r- com r+
-      #unir vértices achados na 
+      # for a in range(len(novo_grafo)):
+      #   for b in range(len(novo_grafo[0])):
+      #     print(novo_grafo[a][b], end=" ")
+      #   print()
+      
+      intersecao = []
+      r_negativo = achar_r_negativo(novo_grafo, i)
+      r_positivo = achar_r_positivo(novo_grafo, i)
+
+      for y in r_negativo:
+        if y in r_positivo:
+          intersecao.append(y) # intersecção de r- com r+
+
+      if len(intersecao) > 1:
+        conex_positivo, conex_negativo = achar_conexoes(novo_grafo, intersecao)
+        novo_grafo = uniao_grafo(novo_grafo, intersecao, conex_positivo, conex_negativo)
+        iteracoes -= len(intersecao)
+        #unir vértices achados
+      i += 1
+  
+    for i in range(len(novo_grafo)):
+      for j in range(len(novo_grafo[0])):
+        print(novo_grafo[i][j], end=" ")
+      print()
 
   def dijkstra(self,origem):
     # -1 é custo infinito
     distancias = [-1]*self.n
     distancias[origem] = 0
-    relacoes = [[0,origem]]
+    relacoes = [[0,[],[],origem]]
     h = HeapMin()
-    h.adiciona_no(0, self.rua[origem], origem)
+    h.adiciona_no(0,[],[],origem)
     
     while h.tamanho() > 0:
-      dist_vertice, vertice = h.remove_no()
+      dist_vertice, pesos, ruas, vertice = h.remove_no()
       for vizinho, peso in enumerate(self.adj[vertice]):
         if peso != -1:  # se existe aresta para o vizinho
           novaDistancia = distancias[vertice] + peso
           if distancias[vizinho] == -1 or novaDistancia < distancias[vizinho]:
             distancias[vizinho] = novaDistancia
-            h.adiciona_no(novaDistancia, vizinho)
+            #atualiza o vetor de pesos e ruas visitados
+            pesos_vizinho = pesos + [peso]
+            ruas_vizinho = ruas + [self.rua[vertice][vizinho]]
+            h.adiciona_no(novaDistancia, pesos_vizinho, ruas_vizinho, vizinho)
             # Verifica se o vértice já está na lista de relações
             encontrado = False
             for i, r in enumerate(relacoes):
-              if r[1] == vizinho:
-                relacoes[i] = [novaDistancia, vizinho]  # Atualiza a relação
+              if r[3] == vizinho:
+                relacoes[i] = [novaDistancia, pesos_vizinho, ruas_vizinho, vizinho]  # Atualiza a relação
                 encontrado = True
                 break
             if not encontrado:
-                relacoes.append([novaDistancia, vizinho])  # Adiciona nova relação
+               relacoes.append([novaDistancia, pesos_vizinho, ruas_vizinho, vizinho])  # Adiciona nova relação
+
     
     # Ordena a lista de relações com base no indice
-    relacoes.sort(key=lambda x: x[1])
+    relacoes.sort(key=lambda x: x[3])
     return relacoes
 
 #optamos por utilizar uma estrutura de dados HeapMin para auxiliar no codigo que implementa algoritmo de Dijkstra
@@ -324,9 +419,9 @@ class HeapMin:
     self.nos = 0
     self.heap = []
 
-  def adiciona_no(self, peso, rua, indice):
-    # "u" é o peso e "indice" é o indice do vertice na matriz/grafo
-    self.heap.append([peso, rua, indice])
+  def adiciona_no(self, custo, pesos, ruas, indice):
+    # Adiciona quatro elementos: custo, pesos, ruas e índice
+    self.heap.append([custo, pesos, ruas, indice])
     self.nos +=1
     f = self.nos
     while True: 
@@ -349,9 +444,9 @@ class HeapMin:
       if f > self.nos:
         break
       if f +1 <= self.nos:
-        if self.heap[f][0][0] < self.heap[f-1][0][0]:
+        if self.heap[f][0] < self.heap[f-1][0]:
           f+=1
-      if self.heap[p-1][0][0] <= self.heap[f-1][0][0]:
+      if self.heap[p-1][0] <= self.heap[f-1][0]:
           break
       else:
         self.heap[p-1] , self.heap[f-1] = self.heap[f-1] , self.heap[p-1]
