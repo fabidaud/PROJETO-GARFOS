@@ -279,8 +279,8 @@ class TGrafo:
     iteracoes = self.n
     
     for i in range(iteracoes):
-      r_negativo = []
-      r_positivo = []
+      r_negativo = achar_r_negativo(self.adj, i)
+      r_positivo = achar_r_positivo(self.adj, i)
       
       #achar r-
 
