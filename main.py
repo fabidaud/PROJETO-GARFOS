@@ -135,9 +135,12 @@ def removerVertice(grafo, vertices):
   
   if vertice is None:
     return
+  
   grafo.removeV(vertice-1)
   # remover o vertice da lista de vertices
-  vertices.remove(vertice)
+  for i in range(len(vertices)):
+    if vertices[i] == vertice:
+      vertices.remove(vertice)[1,2,3,5,6]
   print(f"\nVértice {vertice} removido com sucesso!")
   espera_Enter()
 
@@ -185,16 +188,16 @@ def mostrarGrafo(grafo, vertices):
   espera_Enter()
 
 def grafoReduzido(grafo):
-  # print("GRAFO ATUAL:")
-  # conexidade = grafo.conexidade()
-  # if (conexidade == 3):
-  #   print("\nEste grafo é fortemente conexo, categoria C3!\n")
-  # elif (conexidade == 2):
-  #   print("\nEste grafo é semifortemente conexo, categoria C2!\n")
-  # elif (conexidade == 1):
-  #   print("\nEste grafo é simplesmente conexo, categoria C1!\n")
-  # elif (conexidade == 0):
-  #   print("\nEste grafo é desconexo, categoria C0!\n")
+  print("GRAFO ATUAL:")
+  conexidade = grafo.conexidade()
+  if (conexidade == 3):
+    print("\nEste grafo é fortemente conexo, categoria C3!\n")
+  elif (conexidade == 2):
+    print("\nEste grafo é semifortemente conexo, categoria C2!\n")
+  elif (conexidade == 1):
+    print("\nEste grafo é simplesmente conexo, categoria C1!\n")
+  elif (conexidade == 0):
+    print("\nEste grafo é desconexo, categoria C0!\n")
   
   print("\nGRAFO REDUZIDO:\n")
   grafoReduzido = grafo.grafoReduzido()

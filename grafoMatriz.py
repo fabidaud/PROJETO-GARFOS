@@ -97,105 +97,6 @@ class TGrafo:
           print(f"{vertices[j]} {self.rua[i][j]} -> {self.adj[i][j]} ", end="| ")
       print()
 
-  # def C3(self):
-
-  #   def dfs_T(v):
-  #     fechoTransitivo.append(v)
-  #     for u in range(self.n):
-  #       if self.adj[v][u] == 1 and u not in fechoTransitivo:
-  #         dfs_T(u)
-
-  #   def dfs_I(v):
-  #     fechoInverso.append(v)
-  #     for u in range(self.n):
-  #       if self.adj[u][v] == 1 and u not in fechoInverso:
-  #         dfs_I(u)
-
-  #   fechoTransitivo = []
-  #   fechoInverso = []
-  #   v = -1
-  #   for i in range(self.n):
-  #     for j in range(self.n):
-  #       if self.adj[i][j] == 1:
-  #         v = i
-  #         break
-  #     if v != -1:
-  #       break
-  #   dfs_T(v)
-  #   dfs_I(v)
-  #   fechoTransitivo.sort()
-  #   fechoInverso.sort()
-  #   if fechoTransitivo == fechoInverso:
-  #     return 1
-  #   else:
-  #     return 0
-
-  # def C2(self):
-
-  #   def dfs_T(v):
-  #     fechoTransitivo.append(v)
-  #     for u in range(self.n):
-  #       if self.adj[v][u] == 1 and u not in fechoTransitivo:
-  #         dfs_T(u)
-
-  #   def dfs_I(v):
-  #     fechoInverso.append(v)
-  #     for u in range(self.n):
-  #       if self.adj[u][v] == 1 and u not in fechoInverso:
-  #         dfs_I(u)
-
-  #   fechoTransitivo = []
-  #   fechoInverso = []
-  #   v = -1
-  #   for i in range(self.n):
-  #     for j in range(self.n):
-  #       if self.adj[i][j] == 1:
-  #         v = i
-  #         break
-  #     if v != -1:
-  #       break
-  #   dfs_T(v)
-  #   dfs_I(v)
-  #   uniao = list(set(fechoTransitivo + fechoInverso))
-  #   if len(uniao) == self.n:
-  #     return 1
-  #   else:
-  #     return 0
-
-  # def C1(self, copia):
-  #   #Implementação do algoritmo de Warshall para verificar acessibilidades
-  #   for k in range(self.n):
-  #     for i in range(self.n):
-  #       for j in range(self.n):
-  #         copia[i][j] = copia[i][j] or (copia[i][k] and copia[k][j])
-  #   for i in range(self.n):
-  #     for j in range(self.n):
-  #       if copia[i][j] != 1:
-  #         return 0
-  #   return 1
-
-  # def C0(self, copia):
-  #   for k in range(self.n):
-  #     for i in range(self.n):
-  #       for j in range(self.n):
-  #         copia[i][j] = copia[i][j] or (copia[i][k] and copia[k][j])
-  #   for i in range(self.n):
-  #     for j in range(self.n):
-  #       if copia[i][j] != 1:
-  #         return 1
-  #   return 0
-
-  # def categoriaConexidade(self):
-  #   copia = [linha[:] for linha in self.adj]
-  #   copia = converteDirecionados(copia)
-  #   if self.C0(copia) == 1:
-  #     return 0
-  #   elif self.C3() == 1:
-  #     return 3
-  #   elif self.C2() == 1:
-  #     return 2
-  #   elif self.C1(copia) == 1:
-  #     return 1
   def dfs(self,v, visitados):
     if v not in visitados:
       visitados.append(v)
@@ -267,8 +168,81 @@ class TGrafo:
     return categoria
 
      
-  def grafoReduzido(self):
+  # def grafoReduzido(self):
     
+  #   def achar_r_negativo(matriz, vertice):
+  #     lista = [vertice]
+
+  #     adicionado = True
+
+  #     while adicionado:
+  #       adicionado = False
+  #       for i in range(len(matriz)):
+  #         for y in lista:
+  #           if matriz[i][y] == 1 and i not in lista:
+  #             lista.append(i)
+  #             adicionado = True
+  #     return lista
+
+  #   def achar_r_positivo(matriz, vertice):
+  #     lista = [vertice]
+  
+  #     adicionado = True
+  
+  #     while adicionado:
+  #       adicionado = False
+  #       for i in range(len(matriz)):
+  #         for y in lista:  
+  #           if matriz[y][i] == 1 and i not in lista:
+  #             lista.append(i)
+  #             adicionado = True
+  #     return lista
+
+  #   def achar_conexoes(matriz, lista):
+  #     conexoes_positivo = []
+  #     conexoes_negativo = []
+  #     for i in lista:
+  #       for y in range(len(matriz)):
+  #         if y in lista:
+  #           continue
+  #         if matriz[i][y] == 1 and y not in conexoes_positivo:
+  #           conexoes_positivo.append(y)
+  
+  #     for i in lista:
+  #       for y in range(len(matriz)):
+  #         if y in lista:
+  #           continue
+  #         if matriz[y][i] == 1 and y not in conexoes_negativo:
+  #           conexoes_negativo.append(y)
+  #     return conexoes_positivo, conexoes_negativo
+
+  #   def uniao_grafo(matriz, intersecao, lista_positivo, lista_negativo):
+  #     #primeiro une os vertices
+
+  #     intersecao.sort()
+  #     # print(intersecao)
+  #     # print('\n')
+  #     # for i in matriz:
+  #     #   for y in i:
+  #     #     print(y, end=' ')
+  #     #   print()
+      
+  #     for i in lista_positivo:
+  #       matriz[intersecao[0]][i] = 1
+
+  #     for i in lista_negativo:
+  #       matriz[i][intersecao[0]] = 1
+
+  #     for i in range(len(intersecao)-1, 0, -1):
+  #       del matriz[intersecao[i]]
+
+  #     for i in range(len(matriz)):
+  #       for j in range(len(intersecao)-1, 0, -1):
+  #         del matriz[i][j]
+
+  #     return matriz
+  def grafoReduzido(self):
+
     def achar_r_negativo(matriz, vertice):
       lista = [vertice]
 
@@ -281,20 +255,22 @@ class TGrafo:
             if matriz[i][y] == 1 and i not in lista:
               lista.append(i)
               adicionado = True
+
       return lista
 
     def achar_r_positivo(matriz, vertice):
       lista = [vertice]
-  
+
       adicionado = True
-  
+
       while adicionado:
         adicionado = False
         for i in range(len(matriz)):
-          for y in lista:  
+          for y in lista:
             if matriz[y][i] == 1 and i not in lista:
               lista.append(i)
               adicionado = True
+
       return lista
 
     def achar_conexoes(matriz, lista):
@@ -306,59 +282,45 @@ class TGrafo:
             continue
           if matriz[i][y] == 1 and y not in conexoes_positivo:
             conexoes_positivo.append(y)
-  
+
       for i in lista:
         for y in range(len(matriz)):
           if y in lista:
             continue
           if matriz[y][i] == 1 and y not in conexoes_negativo:
             conexoes_negativo.append(y)
+
       return conexoes_positivo, conexoes_negativo
 
     def uniao_grafo(matriz, intersecao, lista_positivo, lista_negativo):
-      #primeiro une os vertices
-
-      intersecao.sort()
-      # print(intersecao)
-      # print('\n')
-      # for i in matriz:
-      #   for y in i:
-      #     print(y, end=' ')
-      #   print()
-      
+      intersecao.sort(reverse=True)  # Ordena a lista de interseção de forma decrescente para evitar problemas com a remoção de elementos
+  
       for i in lista_positivo:
         matriz[intersecao[0]][i] = 1
-
+  
       for i in lista_negativo:
         matriz[i][intersecao[0]] = 1
-
-      for i in range(len(intersecao)-1, 0, -1):
-        del matriz[intersecao[i]]
-
+  
+      for i in intersecao[1:]:  # Remove os vértices interseccionados
+        del matriz[i]
+  
       for i in range(len(matriz)):
-        for j in range(len(intersecao)-1, 0, -1):
+        for j in intersecao[1:]:  # Remove as conexões para os vértices removidos
           del matriz[i][j]
-
+  
       return matriz
-    
+
     novo_grafo = [row[:] for row in self.adj]
     for i in range(len(novo_grafo)):
-      for y in range(len(novo_grafo)):
-        if novo_grafo[i][y] == -1:
-          novo_grafo[i][y] = 0
-        else:
-          novo_grafo[i][y] = 1
-
-    iteracoes = self.n
+        for y in range(len(novo_grafo)):
+            if novo_grafo[i][y] == -1:
+                novo_grafo[i][y] = 0
+            else:
+                novo_grafo[i][y] = 1
     
+    iteracoes = self.n
     i = 0
     while i < iteracoes:
-
-      # for a in range(len(novo_grafo)):
-      #   for b in range(len(novo_grafo[0])):
-      #     print(novo_grafo[a][b], end=" ")
-      #   print()
-      
       intersecao = []
       r_negativo = achar_r_negativo(novo_grafo, i)
       r_positivo = achar_r_positivo(novo_grafo, i)
@@ -366,11 +328,11 @@ class TGrafo:
       for y in r_negativo:
         if y in r_positivo:
           intersecao.append(y) # intersecção de r- com r+
-
+      
       if len(intersecao) > 1:
         conex_positivo, conex_negativo = achar_conexoes(novo_grafo, intersecao)
         novo_grafo = uniao_grafo(novo_grafo, intersecao, conex_positivo, conex_negativo)
-        iteracoes -= len(intersecao)
+        iteracoes -= len(intersecao)-1
         #unir vértices achados
       i += 1
   
