@@ -131,19 +131,19 @@ def inserirAresta(grafo, vertices):
   espera_Enter()
 
 def removerVertice(grafo, vertices):  
-  vertice = input_in_range('o vértice a ser removido', vertices[0], grafo.n)
-  
+  vertice = input_in_range('o vértice a ser removido', vertices[0], grafo.n)  
   if vertice is None:
     return
+  if vertice in vertices:
+    grafo.removeV(vertice-1)
+    # remover o vertice da lista de vertices
+    vertices.remove(vertice)
+    print(f"\nVértice {vertice} removido com sucesso!")
+  else:
+    print(f"\nO vértice {vertice} não está presente no grafo.")
   
-  grafo.removeV(vertice-1)
-  # remover o vertice da lista de vertices
-  for i in range(len(vertices)):
-    if vertices[i] == vertice:
-      vertices.remove(vertice)[1,2,3,5,6]
-  print(f"\nVértice {vertice} removido com sucesso!")
   espera_Enter()
-
+  
 def removerAresta(grafo, vertices):  
   origem = input_in_range('o vértice origem', vertices[0], grafo.n)
   if origem is None:
@@ -200,9 +200,8 @@ def grafoReduzido(grafo):
     print("\nEste grafo é desconexo, categoria C0!\n")
   
   print("\nGRAFO REDUZIDO:\n")
-  grafoReduzido = grafo.grafoReduzido()
-  
-  
+  grafo.grafoReduzido()
+    
   espera_Enter()
   
 def definir_rota(grafo, vertices):

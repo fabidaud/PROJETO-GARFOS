@@ -3,6 +3,8 @@
 # GUSTAVO SAAD MALUHY ANDRADE - RA: 10332747
 # LAURA FONTE ABI DAUD - RA: 10395586
 
+from copy import deepcopy
+
 TAM_MAX_DEFAULT = 100  # qtde de vértices máxima default
 
 class TGrafo:
@@ -97,151 +99,80 @@ class TGrafo:
           print(f"{vertices[j]} {self.rua[i][j]} -> {self.adj[i][j]} ", end="| ")
       print()
 
-  def dfs(self,v, visitados):
-    if v not in visitados:
-      visitados.append(v)
-
-    for i in range(len(self.adj)):
-      if self.adj[v][i] != -1 and i not in visitados:
-        self.dfs(i,visitados)
-    return visitados
-    
-  def f_conexo(self):
-    resp = True
-    visitados = []
-    for i in range(self.n):
-      visitados = self.dfs(i,[])
-      if len(visitados) < self.n:
-        resp = False
-    return resp
-
-  def sf_conexo(self):
-    resp = True
-    for i in range(len(self.adj)):
-      for j in range(len(self.adj)):
-        visitados_i = self.dfs(i,[])
-        if j not in visitados_i:
-          visitados_j = self.dfs(j,[])
-          if i not in visitados_j:
-            resp = False
-    return resp
-    
-  def desconexo(self):
-    def converteSimetrico(copia):
-      for i in range(len(copia)):
-        for w in range(len(copia)):
-          if i == w:
-            continue
-          else:
-            if (copia[i][w] == -1) and (copia[w][i] != -1):
-              copia[i][w] = copia[w][i]
-            elif (copia[w][i] == -1) and (copia[i][w] != -1):
-              copia[w][i] = copia[i][w]
-      return copia
-
-
-    def percurso_semClasse(matriz,v, visitados): 
+  def conexidade(self):
+    def dfs(copia,v, visitados):
       if v not in visitados:
         visitados.append(v)
-  
-      for i in range(len(matriz)):
-        if matriz[v][i] != -1 and i not in visitados:
-          percurso_semClasse(matriz,i,visitados)
-      return visitados
-      
-    resp = True
-    copia = self.adj
-    copia = converteSimetrico(copia)
-    visitados = percurso_semClasse(copia,0,[])
-    if len(visitados) == self.n:
-      resp = False
-    return resp
 
-  def conexidade(self):
+      for i in range(len(copia)):
+        if copia[v][i] != -1 and i not in visitados:
+          dfs(copia,i,visitados)
+      return visitados
+
+    def f_conexo(copia):
+      resp = True
+      visitados = []
+      for i in range(len(copia)):
+        visitados = dfs(copia,i,[])
+        if len(visitados) < len(copia):
+          resp = False
+      return resp
+
+    def sf_conexo(copia):
+      resp = True
+      for i in range(len(copia)):
+        for j in range(len(copia)):
+          visitados_i = dfs(copia,i,[])
+          if j not in visitados_i:
+            visitados_j = dfs(copia,j,[])
+            if i not in visitados_j:
+              resp = False
+      return resp
+
+    def desconexo(copia):
+      def converteSimetrico(copia):
+        for i in range(len(copia)):
+          for w in range(len(copia)):
+            if i == w:
+              continue
+            else:
+              if (copia[i][w] == -1) and (copia[w][i] != -1):
+                copia[i][w] = copia[w][i]
+              elif (copia[w][i] == -1) and (copia[i][w] != -1):
+                copia[w][i] = copia[i][w]
+        return copia
+
+
+      def percurso_semClasse(matriz,v, visitados): 
+        if v not in visitados:
+          visitados.append(v)
+
+        for i in range(len(matriz)):
+          if matriz[v][i] != -1 and i not in visitados:
+            percurso_semClasse(matriz,i,visitados)
+        return visitados
+
+      resp = True
+      Copia = copia
+      Copia = converteSimetrico(Copia)
+      visitados = percurso_semClasse(Copia,0,[])
+      if len(visitados) == self.n:
+        resp = False
+      return resp
+    
+    copia = [row[:] for row in self.adj]
     categoria = 3
-    if not self.f_conexo():
+    if not f_conexo(copia):
       categoria = 2
-      if not self.sf_conexo():
+      if not sf_conexo(copia):
         categoria = 0
-        if not self.desconexo():
+        if not desconexo(copia):
           categoria = 1
     return categoria
 
      
-  # def grafoReduzido(self):
-    
-  #   def achar_r_negativo(matriz, vertice):
-  #     lista = [vertice]
-
-  #     adicionado = True
-
-  #     while adicionado:
-  #       adicionado = False
-  #       for i in range(len(matriz)):
-  #         for y in lista:
-  #           if matriz[i][y] == 1 and i not in lista:
-  #             lista.append(i)
-  #             adicionado = True
-  #     return lista
-
-  #   def achar_r_positivo(matriz, vertice):
-  #     lista = [vertice]
-  
-  #     adicionado = True
-  
-  #     while adicionado:
-  #       adicionado = False
-  #       for i in range(len(matriz)):
-  #         for y in lista:  
-  #           if matriz[y][i] == 1 and i not in lista:
-  #             lista.append(i)
-  #             adicionado = True
-  #     return lista
-
-  #   def achar_conexoes(matriz, lista):
-  #     conexoes_positivo = []
-  #     conexoes_negativo = []
-  #     for i in lista:
-  #       for y in range(len(matriz)):
-  #         if y in lista:
-  #           continue
-  #         if matriz[i][y] == 1 and y not in conexoes_positivo:
-  #           conexoes_positivo.append(y)
-  
-  #     for i in lista:
-  #       for y in range(len(matriz)):
-  #         if y in lista:
-  #           continue
-  #         if matriz[y][i] == 1 and y not in conexoes_negativo:
-  #           conexoes_negativo.append(y)
-  #     return conexoes_positivo, conexoes_negativo
-
-  #   def uniao_grafo(matriz, intersecao, lista_positivo, lista_negativo):
-  #     #primeiro une os vertices
-
-  #     intersecao.sort()
-  #     # print(intersecao)
-  #     # print('\n')
-  #     # for i in matriz:
-  #     #   for y in i:
-  #     #     print(y, end=' ')
-  #     #   print()
-      
-  #     for i in lista_positivo:
-  #       matriz[intersecao[0]][i] = 1
-
-  #     for i in lista_negativo:
-  #       matriz[i][intersecao[0]] = 1
-
-  #     for i in range(len(intersecao)-1, 0, -1):
-  #       del matriz[intersecao[i]]
-
-  #     for i in range(len(matriz)):
-  #       for j in range(len(intersecao)-1, 0, -1):
-  #         del matriz[i][j]
-
-  #     return matriz
   def grafoReduzido(self):
+    
 
     def achar_r_negativo(matriz, vertice):
       lista = [vertice]
