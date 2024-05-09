@@ -1,4 +1,4 @@
-# TEORIA DOS GRAFOS - ATIVIDADE PROJETO 1 - ARQUIVO FONTE PARA MATRIZ DE ADJACÊNCIAS
+# TEORIA DOS GRAFOS - ATIVIDADE PROJETO 2 - ARQUIVO FONTE PARA MATRIZ DE ADJACÊNCIAS
 # BRUNO CASTRO TOMAZ - RA: 10389988
 # GUSTAVO SAAD MALUHY ANDRADE - RA: 10332747
 # LAURA FONTE ABI DAUD - RA: 10395586
@@ -14,16 +14,13 @@ class TGrafo:
     self.adj = [[-1 for i in range(n)]
                 for j in range(n)]  # -1 indica a inexistencia de aresta
     self.rua = [['' for i in range(n)] for j in range(n)]  # nome da rua
+    self.vertices = [] #vetor que armazena os vértices atuais do grafo
 
   # Insere uma aresta no Grafo tal que v é adjacente a w
   def insereA(self, v, w, peso, nome):
-    if (v in range(self.n)) and (w in range(self.n)):
       self.adj[v][w] = peso  # aresta atualizada com peso
       self.rua[v][w] = nome  # nome da rua que conecta os vértices
       self.m += 1  # atualiza qtd de arestas
-      return True
-    else:
-      return False
 
   def insereV(self):
     # insere vertice no grafo e retorna seu indice
@@ -56,7 +53,7 @@ class TGrafo:
       print("Vértice não encontrado no grafo.")
       return False
     elif self.n == 1:
-      print("Grafo vazio.")
+      print("Grafo trivial.")
       del self.adj[v]
       self.n -= 1
       return True
@@ -81,22 +78,22 @@ class TGrafo:
       self.n -= 1
       return True
 
-  def show_list(self, vertices):
+  def show_list(self):
     # Imprime grafo como uma lista de adjacência
-    for i in range(len(vertices)):
-      print(f"\n{vertices[i]} : ", end="")
-      for j in range(len(vertices)):
+    for i in range(len(self.vertices)):
+      print(f"\n{self.vertices[i]} : ", end="")
+      for j in range(len(self.vertices)):
         if self.adj[i][j] != -1:
-          print(f"{vertices[j]} -> {self.adj[i][j]} ", end="| ")
+          print(f"{self.vertices[j]} -> {self.adj[i][j]} ", end="| ")
       print()
 
-  def show_list_rotulos(self, vertices):
+  def show_list_rotulos(self):
     # Imprime grafo como uma lista de adjacência com pesos
-    for i in range(len(vertices)):
-      print(f"\n{vertices[i]} : ", end="")
-      for j in range(len(vertices)):
+    for i in range(len(self.vertices)):
+      print(f"\n{self.vertices[i]} : ", end="")
+      for j in range(len(self.vertices)):
         if self.adj[i][j] != -1:
-          print(f"{vertices[j]} {self.rua[i][j]} -> {self.adj[i][j]} ",
+          print(f"{self.vertices[j]} {self.rua[i][j]} -> {self.adj[i][j]} ",
                 end="| ")
       print()
 
@@ -313,6 +310,50 @@ class TGrafo:
     relacoes.sort(key=lambda x: x[3])
     return relacoes
 
+  def grau_vertice(self, vertice):
+    grau_entrada = 0
+    grau_saida = 0
+    # Calcula o grau de entrada e de saída do vértice
+    for i in range(self.n):
+      if self.adj[i][vertice] != -1:
+        grau_entrada += 1
+    for i in range(self.n):
+      if self.adj[vertice][i] != -1:
+        grau_saida += 1
+    return grau_entrada, grau_saida
+
+  def caminho_euleriano(self):
+    for vertice in range(self.n):
+      grau_entrada, grau_saida = self.grau_vertice(vertice)
+      grau = grau_entrada + grau_saida
+      if grau % 2 != 0:  # Se o grau do vértice é ímpar, então não há Caminho Euleriano
+        return False
+    return True
+    
+  def ehEuleriano(self):
+    if not self.caminho_euleriano():
+      print("O grafo não é Euleriano.\n")
+      return False
+    print("O grafo é Euleriano.\n")
+    return True
+
+  def possui_caminho_hamiltoniano(self):
+    for vertice in range(self.n):
+      grau_entrada, grau_saida = self.grau_vertice(vertice)
+      grau = grau_entrada + grau_saida
+      if grau < self.n // 2:
+        return False
+    return True
+
+  def ehHamiltoniano(self):
+    if self.n < 3:  #Um grafo com menos de 3 vértices não pode ser Hamiltoniano
+      print("O grafo não é Hamiltoniano.\n")
+      return False      
+    if not self.possui_caminho_hamiltoniano():
+      print("O grafo não é Hamiltoniano.\n")
+      return False
+    print("O grafo é Hamiltoniano.\n")
+    return True
 
 #optamos por utilizar uma estrutura de dados HeapMin para auxiliar no codigo que implementa algoritmo de Dijkstra
 class HeapMin:

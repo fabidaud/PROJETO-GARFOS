@@ -79,9 +79,8 @@
 77
 78
 79
-163
-1;2;Rua Alameda Barros;100
-2;1;Rua Alameda Barros;100
+162
+1;2;Rua Laura Saad;450
 2;3;Rua Alameda Barros;150
 2;14;Rua Doutor Brasilio Machado;350
 3;2;Rua Alameda Barros;150
